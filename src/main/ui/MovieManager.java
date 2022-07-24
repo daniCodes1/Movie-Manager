@@ -1,21 +1,21 @@
 package ui;
 
 import model.Favourites;
-import model.Movie;
 import model.MovieList;
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+// based on Teller app; link below
+// https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
+
+// Movie Manager application
 public class MovieManager {
-    // Movie manager application
+
 
     private Favourites favourites;
     private Scanner input;
     private Boolean keepGoing;
     private MovieList recommended;
-    private String command;
 
 
     // EFFECTS: runs the movie application
@@ -25,7 +25,7 @@ public class MovieManager {
 
     // MODIFIES: this
     // EFFECTS: processes user input
-    private void runMovie() {     // this was originally runTeller --> I changed it to runMovie
+    private void runMovie() {
         keepGoing = true;
         String command = null;
 
@@ -47,34 +47,6 @@ public class MovieManager {
     }
 
     // MODIFIES: this
-    // EFFECTS: processes user command
-    private void processCommand(String command) {
-        keepGoing = true;
-        if (command.equals("r")) {
-            doRecommendation();
-        }
-        if (command.equals("a")) {
-            System.out.println("Thank you for your interest! Here are all the movies available in our database: ");
-            for (String s : recommended.printAllMovies()) {
-                System.out.println(s);
-            }
-        }
-        if (command.equals("q")) {
-            keepGoing = false;
-        }
-        if (command.equals("f")) {
-            if (favourites.viewFavourites() == null) {
-                System.out.println("You currently have no movies in your Favourites Album.");
-                callFavourites();
-            } else {
-                System.out.println("Here are your favourite movies: ");
-                System.out.println(favourites.viewFavourites());
-                callFavourites();
-            }
-        }
-    }
-
-    // MODIFIES: this
     // EFFECTS: initializes program
     private void init() {
         favourites = new Favourites();
@@ -83,6 +55,7 @@ public class MovieManager {
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
+
 
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
@@ -94,7 +67,28 @@ public class MovieManager {
     }
 
     // MODIFIES: this
-    // EFFECTS: conducts a deposit transaction
+    // EFFECTS: processes user command
+    private void processCommand(String command) {
+        keepGoing = true;
+        if (command.equals("r")) {
+            doRecommendation();
+        }
+        if (command.equals("a")) {
+            System.out.println("Thank you for your interest! Here are all the movies available in our database: ");
+            viewAllMovies();
+        }
+        if (command.equals("q")) {
+            keepGoing = false;
+        }
+        if (command.equals("f")) {
+            viewFavourites();
+
+        }
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: prompts user to select a genre and filters movie collection for that genre
     private void doRecommendation() {
         System.out.println("\nPlease type the genre you want:");
         System.out.println("\thorror");
@@ -106,64 +100,74 @@ public class MovieManager {
         String command = input.next();
         command = command.toLowerCase();
 
-        filterGenreOut(command);
-
-    }
-
-    public void filterGenreOut(String s) {
         keepGoing = true;
 
-        if (s.equals("horror") || (s.equals("action")) || (s.equals("romance"))
-                || (s.equals("sci-fi"))) {
-            recommended.filterGenre(s);
-            chooseReleaseDate();
-        } else if (s.equals("q")) {
+        if (command.equals("horror") || (command.equals("action")) || (command.equals("romance"))
+                || (command.equals("sci-fi"))) {
+            recommended.filterGenre(command);
+            filterReleaseDate();
+        } else if (command.equals("q")) {
             keepGoing = false;
         } else {
             System.out.println("Sorry, invalid input. Please try again.");
             doRecommendation();
         }
-
     }
 
 
-    public void chooseReleaseDate() {
+    // EFFECTS: prints out movies in the favourites album and returns to menu
+    public void viewFavourites() {
+        if (favourites.viewFavourites() == null) {
+            System.out.println("You currently have no movies in your Favourites Album.");
+            endOptions();
+        } else {
+            System.out.println("Here are your favourite movies: ");
+            System.out.println(favourites.viewFavourites());
+            endOptions();
+        }
+    }
 
+    // EFFECTS: prints out names of all movies available
+    public void viewAllMovies() {
+        for (String s : recommended.printAllMovies()) {
+            System.out.println(s);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: prompts user to select a release date and filters movie collection for that date
+    public void filterReleaseDate() {
+        keepGoing = true;
         System.out.println("\nPlease choose a release date for your movie:");
-        System.out.println("\t'0' for before 1990");
-        System.out.println("\t'1' for 1990-2000");
-        System.out.println("\t'2' for 2000-2010");
-        System.out.println("\t'3' for 2010-2022");
+        System.out.println("\t'a' for before 1980");
+        System.out.println("\t'b' for 1980-1989");
+        System.out.println("\t'c' for 1990-1999");
+        System.out.println("\t'd' for 2000-2009");
+        System.out.println("\t'e' for 2010-2022");
         System.out.println("\t'q' to quit");
 
         String command = input.next();
         command = command.toLowerCase();
 
-        filterDateOut(command);
-
-    }
-
-    public void filterDateOut(String s) {
-        keepGoing = true;
-
-        if (s.equals("0") || (s.equals("1")) || (s.equals("2"))
-                || (s.equals("3"))) {
+        if (command.equals("a") || (command.equals("b")) || (command.equals("c"))
+                || (command.equals("d")) || (command.equals("e"))) {
             System.out.println("Great choice! Here is your personalized recommendation list: "
-                    + recommended.filterDate(s));
-            callFavourites();
+                    + recommended.filterDate(command));
+            endOptions();
 
         } else {
-            if (s.equals("q")) {
+            if (command.equals("q")) {
                 keepGoing = false;
             } else {
-                System.out.println("Sorry, invalid input. Please try again.");
-                chooseReleaseDate();
+                System.out.println("Sorry, invalid input. Please try again");
+                filterReleaseDate();
             }
         }
     }
 
 
-    public void callFavourites() {
+    public void endOptions() {
+        keepGoing = true;
         System.out.println("\nHow would you like to proceed?");
         System.out.println("\t'i' to input a favourite movie");
         System.out.println("\t'm' to return to main menu");
@@ -172,33 +176,47 @@ public class MovieManager {
         String command = input.next();
         command = command.toLowerCase();
 
-        handleFavourites(command);
+        handleEndOptions(command);
     }
 
-    public void handleFavourites(String fav) {
+
+    // MODIFIES: this
+    // EFFECTS: processes user command
+    public void handleEndOptions(String fav) {
         keepGoing = true;
-        if (fav.equals("i")) {
-            System.out.println("\tPlease type the movie you would like to add.");
-            String command = input.next();
-            //command = command.toLowerCase();
-            favourites.addMovieToFavourites(command);
-            if (favourites.viewFavourites() == null) {
-                System.out.println("You currently have no movies in your Favourites Album.");
-            } else {
-                System.out.println("Here are your favourite movies: " + favourites.viewFavourites());
-                callFavourites();
-            }
+        if (fav.equals("q")) {
+            keepGoing = false;
         } else {
-            if (fav.equals("q")) {
-                keepGoing = false;
+            if (fav.equals("i")) {
+                System.out.println("\tPlease type the movie you would like to add.");
+                String command = input.next();
+                findMovie(command);
+
             } else {
                 if (fav.equals("m")) {
                     System.out.println("Returning to main menu...");
+
                 } else {
-                    System.out.println("Sorry, invalid input. Please try again");
-                    callFavourites();
+                    System.out.println("Sorry, invalid input. Please try again.");
+                    endOptions();
                 }
             }
+        }
+    }
+
+    public void findMovie(String s) {
+        keepGoing = true;
+        if (favourites.addMovieToFavourites(s)) {
+            System.out.println("Your movie has been added.");
+        } else {
+            System.out.println("Sorry, this is an invalid or duplicate entry. Please try again.");
+            handleEndOptions("i");
+        }
+        if (favourites.viewFavourites() == null) {
+            System.out.println("You currently have no movies in your Favourites Album.");
+        } else {
+            System.out.println("Here are your favourite movies: " + favourites.viewFavourites());
+            endOptions();
         }
     }
 }
