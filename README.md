@@ -6,8 +6,7 @@ Hi there! This application is a *movie generator* that helps
 viewers choose a movie to watch. There will be questions about 
 preferences that pop out in the beginning of the program that users can answer. 
 These are meant to filter out movies based on specifications such as
-genre, release date and movie length. Users will have the option to view
-holiday movies for Christmas and Halloween. Additionally, they will be able
+genre, release date and movie length. Additionally, they will be able
 to view a database that contains 50 movies for when they want to just browse around. 
 Users can click on a movie to view a picture of the movie cover as well as a 
 description of the movie. They will be able to add movies to their *favourites
