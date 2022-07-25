@@ -119,7 +119,7 @@ public class MovieList {
 
         recommended.add(new Movie("Top Gun", "action", 1986));
         recommended.add(new Movie("Batman", "action", 1989));
-        recommended.add(new Movie("The Terminator", "action", 1984));
+        recommended.add(new Movie("Predator", "action", 1987));
         recommended.add(new Movie("The Running Man", "action", 1987));
 
         recommended.add(new Movie("Terminator 2: Judgment Day", "action", 1991));

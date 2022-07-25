@@ -4,7 +4,7 @@
 
 Hi there! This application is a *movie generator* that helps 
 viewers choose a movie to watch. Users have the option to answer questions about their
-preferences that pop out in the beginning of the program that users can answer. 
+preferences that pop out in the beginning of the program. 
 These are meant to filter out movies based on specifications such as
 genre and release date. Additionally, they will be able
 to view a database that contains over 70 movies for when they want to just browse around. They will be
