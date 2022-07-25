@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 // Represents a movie having a title, genre and release date
 public class Movie {
     private String title;
@@ -15,6 +13,7 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
+    // getters
     public String getGenre() {
         return genre;
     }

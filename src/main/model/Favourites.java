@@ -10,7 +10,6 @@ public class Favourites {
     ArrayList<Movie> favourites;
     MovieList recommended;
 
-
     // EFFECTS: constructs a favourites collection with list of favourite movies and list of all movies in the database
     public Favourites() {
         favourites = new ArrayList<>();
@@ -29,7 +28,7 @@ public class Favourites {
     }
 
     // MODIFIES: this
-    // EFFECTS: if given Movie is in the database and favourites does not already contain given movie, then add
+    // EFFECTS: if given Movie is in the database and favourites album does not already contain given movie, then add
     // given movie to end of the favourites album and returns true, else return false
     public Boolean addMovieToFavourites(String s) {
         if (recommended.getMovieNames().contains(s) && !(favouritesContains(s))) {
@@ -50,6 +49,7 @@ public class Favourites {
         return false;
     }
 
+    // getter
     public ArrayList<Movie> getFavourites() {
         return favourites;
     }

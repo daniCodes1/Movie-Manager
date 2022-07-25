@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-// represents a movie collection containing list of all movies, a list filtered by genre and release date as well as
+// represents a movie collection containing list of all movies, a list filtered by genre and release date, and
 // lists that consist of movies titles
 
 public class MovieList {
@@ -13,7 +13,7 @@ public class MovieList {
     ArrayList<String> names;
     ArrayList<String> stringNames;
 
-    // EFFECTS: constructs a movie list with a movie database and list of movie names
+    // EFFECTS: constructs a movie collection with a movie database and list of titles of the movies in the database
     public MovieList() {
         recommended = new ArrayList<>();
         names = new ArrayList<>();
@@ -51,8 +51,6 @@ public class MovieList {
         recommended.add(new Movie("La La Land", "romance", 2016));
         recommended.add(new Movie("Me Before You", "romance", 2016));
         recommended.add(new Movie("A Star is Born", "romance", 2018));
-
-
     }
 
     // MODIFIES: this
@@ -112,7 +110,6 @@ public class MovieList {
         recommended.add(new Movie("Us", "horror", 2019));
     }
 
-
     // MODIFIES: this
     // EFFECTS: adds all action movies into database
     public void addAction() {
@@ -151,7 +148,7 @@ public class MovieList {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds movies matching the giving genre from the database to filteredGenre list
+    // EFFECTS: adds movies matching the giving genre from the database to new list
     public void filterGenre(String s) {
         filteredGenre = new ArrayList<>();
         for (Movie m : recommended) {
@@ -185,16 +182,6 @@ public class MovieList {
         return movieToString(filteredReleaseDate);
     }
 
-
-    // MODIFIES: this
-    // EFFECTS: filters filteredGenre list and keeps movies with  2010 <= release date <= 2022
-    public void before2022() {
-        for (Movie m : filteredGenre) {
-            if (m.getReleaseDate() >= 2010 && m.getReleaseDate() <= 2022) {
-                filteredReleaseDate.add(m);
-            }
-        }
-    }
 
     // MODIFIES: this
     // EFFECTS: filters filteredGenre list and keeps movies with release date < 1980
@@ -237,6 +224,16 @@ public class MovieList {
     }
 
     // MODIFIES: this
+    // EFFECTS: filters filteredGenre list and keeps movies with  2010 <= release date <= 2022
+    public void before2022() {
+        for (Movie m : filteredGenre) {
+            if (m.getReleaseDate() >= 2010 && m.getReleaseDate() <= 2022) {
+                filteredReleaseDate.add(m);
+            }
+        }
+    }
+
+    // MODIFIES: this
     // EFFECTS: returns list of names of all the movies in the database
     public ArrayList<String> getMovieNames() {
         stringNames = new ArrayList<>();
@@ -245,7 +242,6 @@ public class MovieList {
         stringNames.addAll(movieToString(recommended));
         return stringNames;
     }
-
 
     // MODIFIES: this
     // EFFECTS: returns list containing titles of all the movies in the given list
@@ -257,13 +253,15 @@ public class MovieList {
         return movieNames;
     }
 
+    // REQUIRES: Movie is not null
     // MODIFIES: this
     // EFFECTS: adds given movie to database
     public void addMovie(Movie m) {
         recommended.add(m);
     }
 
-    //getter
+    //getters:
+
     public Movie getMovie(String s) {
         recommended = new ArrayList<>();
         addMovies();

@@ -8,22 +8,15 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FavouritesTest {
-    ArrayList<Movie> testFavouriteMovies;
     Favourites testFavourites;
-    MovieList testRecommended;
-    Movie movie1;
-    Movie movie2;
     ArrayList<String> list;
     ArrayList<String> list2;
 
 
     @BeforeEach
     void runBefore() {
-        testFavouriteMovies = new ArrayList<>();
         testFavourites = new Favourites();
-        testRecommended = new MovieList();
         list = new ArrayList<>();
-        movie2 = new Movie("Casablanca", "romance", 1942);
     }
 
     @Test

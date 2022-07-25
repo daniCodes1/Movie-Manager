@@ -42,7 +42,6 @@ public class MovieManager {
                 processCommand(command);
             }
         }
-
         System.out.println("\nThank you, have a good day!");
     }
 
@@ -61,7 +60,7 @@ public class MovieManager {
     private void displayMenu() {
         System.out.println("\nYou can request the following information:");
         System.out.println("\t'r' to receive movie recommendations");
-        System.out.println("\t'f' to view or add to your favourites album");
+        System.out.println("\t'f' to view or add to your Favourites Album");
         System.out.println("\t'a' to view all movies available");
         System.out.println("\t'q' to quit");
     }
@@ -125,7 +124,7 @@ public class MovieManager {
         }
     }
 
-    // EFFECTS: prints out names of all movies available
+    // EFFECTS: prints out names of all movies in database
     public void viewAllMovies() {
         for (String s : recommended.printAllMovies()) {
             System.out.println(s);
@@ -168,7 +167,7 @@ public class MovieManager {
     public void endOptions() {
         keepGoing = true;
         System.out.println("\nHow would you like to proceed?");
-        System.out.println("\t'i' to input a favourite movie");
+        System.out.println("\t'i' to input a movie into your Favourites Album");
         System.out.println("\t'm' to return to main menu");
         System.out.println("\t'q' to quit");
 
@@ -214,7 +213,7 @@ public class MovieManager {
             showFavourites();
             endOptions();
         } else {
-            System.out.println("Sorry, this is an invalid or duplicate entry. Please try again.");
+            System.out.println("This is an invalid or duplicate entry. Please try again.");
             handleEndOptions("i");
         }
 

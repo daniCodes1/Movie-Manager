@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MovieListTest {
     MovieList testMovieList;
-    MovieList names;
     ArrayList<String> list;
     ArrayList<Movie> movies;
     Movie casablanca;
@@ -23,13 +22,10 @@ public class MovieListTest {
     MovieList test2000;
     MovieList test2010;
     MovieList test2022;
-    MovieList testExtra;
-
 
     @BeforeEach
     void runBefore() {
         testMovieList = new MovieList();
-        names = new MovieList();
         list = new ArrayList<>();
         casablanca = new Movie("Casablanca", "romance", 1942);
         futureMovie = new Movie("Future", "romance", 2030);
@@ -103,7 +99,6 @@ public class MovieListTest {
         test2022.filterDate("e");
         assertEquals(3, test2022.filteredReleaseDate.size());
     }
-
 
 
     @Test
