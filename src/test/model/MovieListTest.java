@@ -3,6 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.activation.ActivationMonitor;
 import java.util.ArrayList;
 
 import static java.util.Collections.emptyList;
@@ -17,6 +18,10 @@ public class MovieListTest {
     ArrayList<Movie> movies;
     Movie casablanca;
     Movie saw;
+    MovieList test1990;
+    MovieList test2000;
+    MovieList test2010;
+    MovieList test2022;
 
 
     @BeforeEach
@@ -63,7 +68,36 @@ public class MovieListTest {
         assertEquals(18, testMovieList.getFilteredGenre().size());
         testMovieList.filterDate("a");
         assertEquals(3, testMovieList.filteredReleaseDate.size());
+
+        test1990 = new MovieList();
+        test1990.addMovies();
+        test1990.filterGenre("romance");
+        assertEquals(16, test1990.getFilteredGenre().size());
+        test1990.filterDate("b");
+        assertEquals(3, test1990.filteredReleaseDate.size());
+
+        test2000 = new MovieList();
+        test2000.addMovies();
+        test2000.filterGenre("romance");
+        assertEquals(16, test2000.getFilteredGenre().size());
+        test2000.filterDate("c");
+        assertEquals(4, test2000.filteredReleaseDate.size());
+
+        test2010 = new MovieList();
+        test2010.addMovies();
+        test2010.filterGenre("romance");
+        assertEquals(16, test2010.getFilteredGenre().size());
+        test2010.filterDate("d");
+        assertEquals(3, test2010.filteredReleaseDate.size());
+
+        test2022 = new MovieList();
+        test2022.addMovies();
+        test2022.filterGenre("romance");
+        assertEquals(16, test2022.getFilteredGenre().size());
+        test2022.filterDate("e");
+        assertEquals(3, test2022.filteredReleaseDate.size());
     }
+
 
 
     @Test
@@ -84,6 +118,11 @@ public class MovieListTest {
         list.add("Saw");
         assertEquals(list, testMovieList.movieToString(movies));
         assertEquals(2, testMovieList.movieToString(movies).size());
+    }
+
+    @Test
+    void testGetMovie() {
+        assertEquals(null, testMovieList.getMovie("Paw Patrol"));
     }
 }
 

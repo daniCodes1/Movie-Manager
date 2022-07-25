@@ -50,19 +50,8 @@ public class Favourites {
         return false;
     }
 
-    // REQUIRES: m != null
-    // MODIFIES: this
-    // EFFECTS: removes this movie from the list of favourite movies
-    public void removeMovie(Movie m) {
-        favourites.remove(m);
-    }
-
     public ArrayList<Movie> getFavourites() {
         return favourites;
-    }
-
-    public MovieList getRecommended() {
-        return recommended;
     }
 
 
