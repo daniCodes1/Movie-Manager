@@ -16,6 +16,7 @@ class FavouritesTest {
     ArrayList<String> list;
     ArrayList<String> list2;
 
+
     @BeforeEach
     void runBefore() {
         testFavouriteMovies = new ArrayList<>();
@@ -45,7 +46,6 @@ class FavouritesTest {
         testFavourites.addMovieToFavourites("Titanic");
         assertTrue(testFavourites.favouritesContains("Titanic"));
         assertEquals(testFavourites.viewFavourites(), list2);
-
     }
 
     @Test
