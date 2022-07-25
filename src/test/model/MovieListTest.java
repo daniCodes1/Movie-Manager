@@ -94,7 +94,10 @@ public class MovieListTest {
         assertEquals(3, test2010.filteredReleaseDate.size());
 
         test2022 = new MovieList();
+        futureMovie = new Movie("Future", "horror", 2040);
+
         test2022.addMovies();
+        test2022.addMovie(futureMovie);
         test2022.filterGenre("romance");
         assertEquals(16, test2022.getFilteredGenre().size());
         test2022.filterDate("e");

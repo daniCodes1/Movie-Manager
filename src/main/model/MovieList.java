@@ -51,6 +51,8 @@ public class MovieList {
         recommended.add(new Movie("La La Land", "romance", 2016));
         recommended.add(new Movie("Me Before You", "romance", 2016));
         recommended.add(new Movie("A Star is Born", "romance", 2018));
+
+
     }
 
     // MODIFIES: this
@@ -253,6 +255,12 @@ public class MovieList {
             movieNames.add(m.getTitle());
         }
         return movieNames;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds given movie to database
+    public void addMovie(Movie m) {
+        recommended.add(m);
     }
 
     //getter
