@@ -1,5 +1,6 @@
 package model;
 
+import java.io.CharArrayReader;
 import java.util.ArrayList;
 
 // represents a favourites list storing user's favourite movies and list of all movies in database
@@ -10,12 +11,15 @@ public class Favourites {
     MovieList recommended;
 
 
+    // EFFECTS: constructs a favourites collection with list of favourite movies and list of all movies in the database
     public Favourites() {
         favourites = new ArrayList<>();
         recommended = new MovieList();
     }
 
 
+    // MODIFIES: this
+    // EFFECTS: if favourites album is empty, return null, else return a list of titles of the movies in favourites
     public ArrayList<String> viewFavourites() {
         if (favourites.size() == 0) {
             return null;
@@ -24,9 +28,9 @@ public class Favourites {
         }
     }
 
-    // REQUIRES: favourites does not already contain a Movie with the same title as the given movie
     // MODIFIES: this
-    // EFFECTS: adds given movie to end of the favourites album
+    // EFFECTS: if given Movie is in the database and favourites does not already contain given movie, then add
+    // given movie to end of the favourites album and returns true, else return false
     public Boolean addMovieToFavourites(String s) {
         if (recommended.getMovieNames().contains(s) && !(favouritesContains(s))) {
             favourites.add(recommended.getMovie(s));
@@ -51,6 +55,14 @@ public class Favourites {
     // EFFECTS: removes this movie from the list of favourite movies
     public void removeMovie(Movie m) {
         favourites.remove(m);
+    }
+
+    public ArrayList<Movie> getFavourites() {
+        return favourites;
+    }
+
+    public MovieList getRecommended() {
+        return recommended;
     }
 
 

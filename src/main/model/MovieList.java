@@ -2,7 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
-// represents a movie collection containing
+// represents a movie collection containing list of all movies, a list filtered by genre and release date as well as
+// lists that consist of movies titles
 
 public class MovieList {
     ArrayList<Movie> recommended;
@@ -12,17 +13,14 @@ public class MovieList {
     ArrayList<String> names;
     ArrayList<String> stringNames;
 
-
+    // EFFECTS: constructs a movie list with a movie database and list of movie names
     public MovieList() {
-        filteredGenre = new ArrayList<>();
         recommended = new ArrayList<>();
-        filteredReleaseDate = new ArrayList<>();
         names = new ArrayList<>();
-        stringNames = new ArrayList<>();
-
-
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds movies into database
     public void addMovies() {
         addRomance();
         addAction();
@@ -30,7 +28,8 @@ public class MovieList {
         addSciFi();
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: adds all romance movies into database
     public void addRomance() {
         recommended.add(new Movie("Casablanca", "romance", 1942));
         recommended.add(new Movie("Gone with the Wind", "romance", 1939));
@@ -54,6 +53,8 @@ public class MovieList {
         recommended.add(new Movie("A Star is Born", "romance", 2018));
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds all sci-fi movies into database
     public void addSciFi() {
         recommended.add(new Movie("A Clockwork Orange", "sci-fi", 1971));
         recommended.add(new Movie("Star Wars", "sci-fi", 1977));
@@ -82,6 +83,8 @@ public class MovieList {
     }
 
 
+    // MODIFIES: this
+    // EFFECTS: adds all horror movies into database
     public void addHorror() {
         recommended.add(new Movie("Psycho", "horror", 1960));
         recommended.add(new Movie("The Exorcist", "horror", 1973));
@@ -107,6 +110,9 @@ public class MovieList {
         recommended.add(new Movie("Us", "horror", 2019));
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: adds all action movies into database
     public void addAction() {
         recommended.add(new Movie("Dirty Harry", "action", 1971));
         recommended.add(new Movie("Enter the Dragon", "action", 1973));
@@ -133,8 +139,8 @@ public class MovieList {
         recommended.add(new Movie("Avengers: Endgame", "action", 2019));
     }
 
-
-    //
+    // MODIFIES: this
+    // EFFECTS: returns list of titles of all the movies in the database
     public ArrayList<String> printAllMovies() {
         for (Movie m : recommended) {
             names.add(m.getTitle());
@@ -142,6 +148,8 @@ public class MovieList {
         return names;
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds movies matching the giving genre from the database to filteredGenre list
     public void filterGenre(String s) {
         filteredGenre = new ArrayList<>();
         for (Movie m : recommended) {
@@ -151,7 +159,9 @@ public class MovieList {
         }
     }
 
-    public ArrayList<String> filterDate(String s) { // int is representing the release date
+    // MODIFIES: this
+    // EFFECTS: filters the filteredGenre list and keeps movies matching the given release date
+    public ArrayList<String> filterDate(String s) {
         filteredReleaseDate = new ArrayList<>();
         if (s.equals("a")) {
             before1980();
@@ -178,6 +188,8 @@ public class MovieList {
     }
 
 
+    // MODIFIES: this
+    // EFFECTS: filters filteredGenre list and keeps movies with release date < 1980
     public void before1980() {
         for (Movie m : filteredGenre) {
             if (m.getReleaseDate() < 1980) {
@@ -186,38 +198,38 @@ public class MovieList {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: filters filteredGenre list and keeps movies with 1980 <= release date < 1990
     public void before1990() {
-        for (Movie mo : filteredGenre) {
-            if (mo.getReleaseDate() >= 1980 && mo.getReleaseDate() < 1990) {
-                filteredReleaseDate.add(mo);
+        for (Movie m : filteredGenre) {
+            if (m.getReleaseDate() >= 1980 && m.getReleaseDate() < 1990) {
+                filteredReleaseDate.add(m);
             }
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: filters filteredGenre list and keeps movie if 1990 <= release date < 2000
     public void before2000() {
-        for (Movie mov : filteredGenre) {
-            if (mov.getReleaseDate() >= 1990 && mov.getReleaseDate() < 2000) {
-                filteredReleaseDate.add(mov);
+        for (Movie m : filteredGenre) {
+            if (m.getReleaseDate() >= 1990 && m.getReleaseDate() < 2000) {
+                filteredReleaseDate.add(m);
             }
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: filters filteredGenre list and keeps movie if 2000 <= release date < 2010
     public void before2010() {
-        for (Movie movi : filteredGenre) {
-            if (movi.getReleaseDate() >= 2000 && movi.getReleaseDate() < 2010) {
-                filteredReleaseDate.add(movi);
+        for (Movie m : filteredGenre) {
+            if (m.getReleaseDate() >= 2000 && m.getReleaseDate() < 2010) {
+                filteredReleaseDate.add(m);
             }
         }
     }
 
-    public ArrayList<String> movieToString(ArrayList<Movie> listOfMovies) {
-        movieNames = new ArrayList<>();
-        for (Movie m : listOfMovies) {
-            movieNames.add(m.getTitle());
-        }
-        return movieNames;
-    }
-
+    // MODIFIES: this
+    // EFFECTS: returns list of names of all the movies in the database
     public ArrayList<String> getMovieNames() {
         stringNames = new ArrayList<>();
         recommended = new ArrayList<>();
@@ -226,6 +238,18 @@ public class MovieList {
         return stringNames;
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: returns list containing titles of all the movies in the given list
+    public ArrayList<String> movieToString(ArrayList<Movie> listOfMovies) {
+        movieNames = new ArrayList<>();
+        for (Movie m : listOfMovies) {
+            movieNames.add(m.getTitle());
+        }
+        return movieNames;
+    }
+
+    //getter
     public Movie getMovie(String s) {
         recommended = new ArrayList<>();
         addMovies();
@@ -236,5 +260,18 @@ public class MovieList {
         }
         return null;
     }
+
+    public ArrayList getRecommended() {
+        return recommended;
+    }
+
+    public ArrayList getNames() {
+        return names;
+    }
+
+    public ArrayList getFilteredGenre() {
+        return filteredGenre;
+    }
+
 }
 

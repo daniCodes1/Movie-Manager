@@ -82,10 +82,8 @@ public class MovieManager {
         }
         if (command.equals("f")) {
             viewFavourites();
-
         }
     }
-
 
     // MODIFIES: this
     // EFFECTS: prompts user to select a genre and filters movie collection for that genre
@@ -114,7 +112,7 @@ public class MovieManager {
         }
     }
 
-
+    // MODIFIES: this
     // EFFECTS: prints out movies in the favourites album and returns to menu
     public void viewFavourites() {
         if (favourites.viewFavourites() == null) {
@@ -165,7 +163,8 @@ public class MovieManager {
         }
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: prompts user to select their next step after receiving a recommendation
     public void endOptions() {
         keepGoing = true;
         System.out.println("\nHow would you like to proceed?");
@@ -204,22 +203,34 @@ public class MovieManager {
         }
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: if movie is in database and is not already in favourites, adds movie to favourites, else prompts
+    // user to retype the movie they wish to add
     public void findMovie(String s) {
         keepGoing = true;
         if (favourites.addMovieToFavourites(s)) {
             System.out.println("Your movie has been added.");
+            showFavourites();
+            endOptions();
         } else {
             System.out.println("Sorry, this is an invalid or duplicate entry. Please try again.");
             handleEndOptions("i");
         }
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: informs user if favourites album is empty, else print out list of titles of movies in favourites album
+    public void showFavourites() {
         if (favourites.viewFavourites() == null) {
             System.out.println("You currently have no movies in your Favourites Album.");
         } else {
             System.out.println("Here are your favourite movies: " + favourites.viewFavourites());
-            endOptions();
         }
     }
 }
+
 
 
 
