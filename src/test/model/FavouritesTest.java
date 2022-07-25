@@ -44,7 +44,7 @@ class FavouritesTest {
     @Test
     void testAddMovieToFavourites() {
         assertTrue(testFavourites.addMovieToFavourites("The Terminator"));
-        assertFalse(testFavourites.addMovieToFavourites("Lalala"));
+        assertFalse(testFavourites.addMovieToFavourites("Not a Movie"));
         assertTrue(testFavourites.addMovieToFavourites("Carrie"));
         assertFalse(testFavourites.addMovieToFavourites("The Terminator"));
 
@@ -53,7 +53,7 @@ class FavouritesTest {
   @Test
     void testFavouritesContains() {
         assertFalse(testFavourites.favouritesContains("The Shining"));
-        assertFalse(testFavourites.favouritesContains("Lalalala"));
+        assertFalse(testFavourites.favouritesContains("Not a Movie"));
         testFavourites.addMovieToFavourites("Interstellar");
         assertTrue(testFavourites.favouritesContains("Interstellar"));
         testFavourites.addMovieToFavourites("Black Panther");

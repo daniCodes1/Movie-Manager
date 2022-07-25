@@ -1,10 +1,8 @@
 package model;
 
-import java.io.CharArrayReader;
 import java.util.ArrayList;
 
-// represents a favourites list storing user's favourite movies and list of all movies in database
-
+// Represents a favourites list storing user's favourite movies and list of all movies in database
 public class Favourites {
 
     ArrayList<Movie> favourites;
@@ -29,7 +27,7 @@ public class Favourites {
 
     // MODIFIES: this
     // EFFECTS: if given Movie is in the database and favourites album does not already contain given movie, then add
-    // given movie to end of the favourites album and returns true, else return false
+    // given movie to end of the favourites album and returns true, else returns false
     public Boolean addMovieToFavourites(String s) {
         if (recommended.getMovieNames().contains(s) && !(favouritesContains(s))) {
             favourites.add(recommended.getMovie(s));

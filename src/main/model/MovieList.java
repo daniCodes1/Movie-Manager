@@ -2,9 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
-// represents a movie collection containing list of all movies, a list filtered by genre and release date, and
+// Represents a movie collection containing list of all movies, a list filtered by genre and release date, and
 // lists that consist of movies titles
-
 public class MovieList {
     ArrayList<Movie> recommended;
     ArrayList<Movie> filteredGenre;

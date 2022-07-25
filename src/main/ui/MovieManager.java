@@ -11,7 +11,6 @@ import java.util.Scanner;
 // Movie Manager application
 public class MovieManager {
 
-
     private Favourites favourites;
     private Scanner input;
     private Boolean keepGoing;
