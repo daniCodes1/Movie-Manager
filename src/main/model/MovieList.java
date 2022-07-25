@@ -175,11 +175,7 @@ public class MovieList {
                     if (s.equals("d")) {
                         before2010();
                     } else {
-                        for (Movie m : filteredGenre) {
-                            if (m.getReleaseDate() >= 2010 && m.getReleaseDate() <= 2022) {
-                                filteredReleaseDate.add(m);
-                            }
-                        }
+                        before2022();
                     }
                 }
             }
@@ -187,6 +183,16 @@ public class MovieList {
         return movieToString(filteredReleaseDate);
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: filters filteredGenre list and keeps movies with  2010 <= release date <= 2022
+    public void before2022() {
+        for (Movie m : filteredGenre) {
+            if (m.getReleaseDate() >= 2010 && m.getReleaseDate() <= 2022) {
+                filteredReleaseDate.add(m);
+            }
+        }
+    }
 
     // MODIFIES: this
     // EFFECTS: filters filteredGenre list and keeps movies with release date < 1980

@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MovieTest {
     Movie casablanca;
-    Movie titanic;
 
 
     @BeforeEach

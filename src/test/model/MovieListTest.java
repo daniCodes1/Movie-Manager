@@ -18,10 +18,12 @@ public class MovieListTest {
     ArrayList<Movie> movies;
     Movie casablanca;
     Movie saw;
+    Movie futureMovie;
     MovieList test1990;
     MovieList test2000;
     MovieList test2010;
     MovieList test2022;
+    MovieList testExtra;
 
 
     @BeforeEach
@@ -30,6 +32,7 @@ public class MovieListTest {
         names = new MovieList();
         list = new ArrayList<>();
         casablanca = new Movie("Casablanca", "romance", 1942);
+        futureMovie = new Movie("Future", "romance", 2030);
         saw = new Movie("Saw", "horror", 2004);
         movies = new ArrayList<>();
 
@@ -92,9 +95,12 @@ public class MovieListTest {
 
         test2022 = new MovieList();
         test2022.addMovies();
+        list.add("La La Land");
+        list.add("Me Before You");
+        list.add("A Star is Born");
         test2022.filterGenre("romance");
         assertEquals(16, test2022.getFilteredGenre().size());
-        test2022.filterDate("e");
+        assertEquals(list, test2022.filterDate("e"));
         assertEquals(3, test2022.filteredReleaseDate.size());
     }
 
