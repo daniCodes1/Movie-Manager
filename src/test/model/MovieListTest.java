@@ -94,6 +94,8 @@ public class MovieListTest {
         assertEquals(3, test2010.filteredReleaseDate.size());
 
         test2022 = new MovieList();
+        list = new ArrayList<>();
+        assertEquals(list, test2022.filterDate("e"));
         test2022.addMovies();
         list.add("La La Land");
         list.add("Me Before You");

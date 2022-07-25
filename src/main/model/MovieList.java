@@ -12,11 +12,13 @@ public class MovieList {
     ArrayList<String> movieNames;
     ArrayList<String> names;
     ArrayList<String> stringNames;
+    ArrayList<String> list;
 
     // EFFECTS: constructs a movie list with a movie database and list of movie names
     public MovieList() {
         recommended = new ArrayList<>();
         names = new ArrayList<>();
+        list = new ArrayList<>();
     }
 
     // MODIFIES: this
@@ -163,19 +165,23 @@ public class MovieList {
     // EFFECTS: filters the filteredGenre list and keeps movies matching the given release date
     public ArrayList<String> filterDate(String s) {
         filteredReleaseDate = new ArrayList<>();
-        if (s.equals("a")) {
-            before1980();
+        if (filteredGenre == null) {
+            return list;
         } else {
-            if (s.equals("b")) {
-                before1990();
+            if (s.equals("a")) {
+                before1980();
             } else {
-                if (s.equals("c")) {
-                    before2000();
+                if (s.equals("b")) {
+                    before1990();
                 } else {
-                    if (s.equals("d")) {
-                        before2010();
+                    if (s.equals("c")) {
+                        before2000();
                     } else {
-                        before2022();
+                        if (s.equals("d")) {
+                            before2010();
+                        } else {
+                            before2022();
+                        }
                     }
                 }
             }
