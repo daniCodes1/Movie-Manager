@@ -59,10 +59,10 @@ public class Favourites implements Writable {
     }
 
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(favourites, recommended);
-    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(favourites, recommended);
+//    }
 
     // EFFECTS: returns true if favourites album contains movie with given name, else returns false
     public Boolean favouritesContains(String s) {
