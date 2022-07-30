@@ -5,6 +5,9 @@ import model.Favourites;
 import org.json.JSONObject;
 import java.io.*;
 
+// based on JsonSerializationDemo ; link below
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
 // Represents a writer that writes JSON representation of favourites album to file
 public class JsonWriter {
     private static final int TAB = 4;

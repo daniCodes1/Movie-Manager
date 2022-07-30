@@ -9,10 +9,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
-
 import org.json.*;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// based on JsonSerializationDemo ; link below
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+// Represents a reader that reads a favourites album from JSON data stored in file
 public class JsonReader {
     private String source;
 
