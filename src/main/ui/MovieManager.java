@@ -12,6 +12,9 @@ import java.util.Scanner;
 // based on Teller app; link below
 // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
 
+// based on JsonSerializationDemo ; link below
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
 // Movie Manager application
 public class MovieManager {
 
@@ -92,9 +95,9 @@ public class MovieManager {
         } else if (command.equals("r")) {
             removeMovie();
         } else if (command.equals("s")) {
-            saveWorkRoom();
+            saveFavourites();
         } else if (command.equals("l")) {
-            loadWorkRoom();
+            loadFavourites();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -262,8 +265,8 @@ public class MovieManager {
 
 
 
-    // EFFECTS: saves the workroom to file
-    private void saveWorkRoom() {
+    // EFFECTS: saves the favourites album to file
+    private void saveFavourites() {
         try {
             jsonWriter.open();
             jsonWriter.write(favourites);
@@ -275,8 +278,8 @@ public class MovieManager {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
-    private void loadWorkRoom() {
+    // EFFECTS: loads favourites album from file
+    private void loadFavourites() {
         try {
             favourites = jsonReader.read();
             System.out.println("Loaded Favourites Album" + " from " + JSON_STORE);

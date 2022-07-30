@@ -1,7 +1,6 @@
 package persistence;
 
 import model.Movie;
-import model.Favourites;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

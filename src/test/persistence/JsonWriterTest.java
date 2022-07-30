@@ -1,17 +1,11 @@
 package persistence;
 
 import model.Movie;
-import model.MovieList;
 import model.Favourites;
-import org.json.JSONObject;
-import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import org.junit.jupiter.api.Test;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,15 +23,15 @@ public class JsonWriterTest extends JsonTest {
     }
 
     @Test
-    void testWriterEmptyWorkroom() {
+    void testWriterEmptyFavourites() {
         try {
             Favourites fav = new Favourites();
-            JsonWriter writer = new JsonWriter("./data/testWriterEmptyWorkroom.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyFavourites.json");
             writer.open();
             writer.write(fav);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterEmptyWorkroom.json");
+            JsonReader reader = new JsonReader("./data/testWriterEmptyFavourites.json");
             fav = reader.read();
             assertEquals(0, fav.getFavourites().size());
         } catch (IOException e) {
@@ -46,17 +40,17 @@ public class JsonWriterTest extends JsonTest {
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralFavourites() {
         try {
             Favourites fav = new Favourites();
             fav.addMovieToFavourites("Titanic");
             fav.addMovieToFavourites("The Terminator");
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralFavourites.json");
             writer.open();
             writer.write(fav);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralFavourites.json");
             fav = reader.read();
             ArrayList<Movie> movies = fav.getFavourites();
             assertEquals(2, fav.getFavourites().size());

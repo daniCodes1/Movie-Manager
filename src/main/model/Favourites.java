@@ -58,12 +58,6 @@ public class Favourites implements Writable {
         }
     }
 
-
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(favourites, recommended);
-//    }
-
     // EFFECTS: returns true if favourites album contains movie with given name, else returns false
     public Boolean favouritesContains(String s) {
         for (Movie m : favourites) {
@@ -74,6 +68,13 @@ public class Favourites implements Writable {
         return false;
     }
 
+
+    // getter
+    public ArrayList<Movie> getFavourites() {
+        return favourites;
+    }
+
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -81,22 +82,14 @@ public class Favourites implements Writable {
         return json;
     }
 
-    // EFFECTS: returns things in this workroom as a JSON array
+    // EFFECTS: returns things in this favourites album as a JSON array
     private JSONArray favouritesToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Movie m : favourites) {
             jsonArray.put(m.toJson());
         }
-
         return jsonArray;
-    }
-
-
-
-    // getter
-    public ArrayList<Movie> getFavourites() {
-        return favourites;
     }
 
 

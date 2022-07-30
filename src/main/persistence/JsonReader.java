@@ -21,7 +21,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads favourites from file and returns it;
     // throws IOException if an error occurs reading data from file
     public Favourites read() throws IOException {
         String jsonData = readFile(source);
@@ -48,7 +48,7 @@ public class JsonReader {
     }
 
     // MODIFIES: fav
-    // EFFECTS: parses movies from JSON object and adds them to favourites
+    // EFFECTS: parses movies from JSON object and adds them to favourites album
     private void addFavourites(Favourites fav, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("movies");
         for (Object json : jsonArray) {
@@ -58,7 +58,7 @@ public class JsonReader {
     }
 
     // MODIFIES: fav
-    // EFFECTS: parses movie from JSON object and adds it to workroom
+    // EFFECTS: parses movie from JSON object and adds it to favourites album
     private void addMovie(Favourites fav, JSONObject jsonObject) {
         String title = jsonObject.getString("title");
         String genre = jsonObject.getString("genre");
