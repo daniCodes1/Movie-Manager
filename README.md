@@ -26,9 +26,12 @@ to find a movie that doesn't just entertain but **also communicates** with them 
 
 - *As a user, I want to be able to save my favourite movies
   into a “favourite album”*
-- *As a user, I want to be able to return to the homepage*
-- *As a user, I want to be able to input my movie preferences*
+- *As a user, I want to be able to be able to remove movies from my favourite album*
+- *As a user, I want to be able to input my movie preferences and receive a movie recommendation*
 - *As a user, I want to be able to view a list of all the movies
   for when I don’t have a preference*
 - *As a user, I want to be able to view the movies in my favourites album*
-- *As a user, I want to be able to quit the program*
+- *As a user, when I select the quit option from the application menu, I want to be reminded to save my 
+   favourites list*
+- *As a user, when I start the application, I want to be given the option to load my favourites list
+   from file*

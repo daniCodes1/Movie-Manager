@@ -58,9 +58,10 @@ public class MovieManager {
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
         System.out.println("\nYou can request the following information:");
-        System.out.println("\t'r' to receive movie recommendations");
+        System.out.println("\t'm' to receive movie recommendations");
         System.out.println("\t'f' to view or add to your Favourites Album");
         System.out.println("\t'a' to view all movies available");
+        System.out.println("\t'r' to remove movies from your Favourites Album");
         System.out.println("\t'q' to quit");
     }
 
@@ -68,7 +69,7 @@ public class MovieManager {
     // EFFECTS: processes user command
     private void processCommand(String command) {
         keepGoing = true;
-        if (command.equals("r")) {
+        if (command.equals("m")) {
             doRecommendation();
         }
         if (command.equals("a")) {
@@ -81,7 +82,26 @@ public class MovieManager {
         if (command.equals("f")) {
             viewFavourites();
         }
+        if (command.equals("r")) {
+            removeMovie();
+        }
     }
+
+    private void removeMovie() {
+        System.out.println("\nPlease type the movie you would like to remove.");
+
+        String command = input.next();
+        //command = command.toLowerCase();
+
+        if (favourites.removeMovieFromFavourites(command)) {
+            System.out.println("Your movie has been removed.");
+            endOptions();
+        } else {
+            System.out.println("This is an invalid entry. Please try again.");
+            removeMovie();
+        }
+    }
+
 
     // MODIFIES: this
     // EFFECTS: prompts user to select a genre and filters movie collection for that genre

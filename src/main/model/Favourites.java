@@ -1,12 +1,14 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 // Represents a favourites list storing user's favourite movies and list of all movies in database
 public class Favourites {
 
     ArrayList<Movie> favourites;
     MovieList recommended;
+    ArrayList<Movie> removed;
 
     // EFFECTS: constructs a favourites collection with list of favourite movies and list of all movies in the database
     public Favourites() {
@@ -35,6 +37,27 @@ public class Favourites {
         } else {
             return false;
         }
+    }
+
+    public Boolean removeMovieFromFavourites(String s) {
+        removed = new ArrayList<>();
+        if (favouritesContains(s)) {
+            for (Movie m : favourites) {
+                if (!(s.equals(m.getTitle()))) {
+                    removed.add(m);
+                }
+            }
+            favourites = removed;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(favourites, recommended);
     }
 
     // EFFECTS: returns true if favourites album contains movie with given name, else returns false
