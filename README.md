@@ -35,3 +35,4 @@ to find a movie that doesn't just entertain but **also communicates** with them 
    favourites list*
 - *As a user, when I start the application, I want to be given the option to load my favourites list
    from file*
+
