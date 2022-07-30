@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a movie having a title, genre and release date
-public class Movie {
+public class Movie implements Writable {
     private String title;
     private String genre;
     private int releaseDate;
@@ -11,6 +14,15 @@ public class Movie {
         this.title = title;
         this.genre = genre;
         this.releaseDate = releaseDate;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("genre", genre);
+        json.put("releaseDate", releaseDate);
+        return json;
     }
 
     // getters

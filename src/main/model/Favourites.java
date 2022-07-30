@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 // Represents a favourites list storing user's favourite movies and list of all movies in database
-public class Favourites {
+public class Favourites implements Writable {
 
     ArrayList<Movie> favourites;
     MovieList recommended;
@@ -69,6 +73,26 @@ public class Favourites {
         }
         return false;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("movies", favouritesToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray favouritesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Movie m : favourites) {
+            jsonArray.put(m.toJson());
+        }
+
+        return jsonArray;
+    }
+
+
 
     // getter
     public ArrayList<Movie> getFavourites() {

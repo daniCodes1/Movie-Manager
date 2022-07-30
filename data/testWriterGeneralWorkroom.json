@@ -1,0 +1,12 @@
+{"movies": [
+    {
+        "releaseDate": 1997,
+        "genre": "romance",
+        "title": "Titanic"
+    },
+    {
+        "releaseDate": 1984,
+        "genre": "sci-fi",
+        "title": "The Terminator"
+    }
+]}

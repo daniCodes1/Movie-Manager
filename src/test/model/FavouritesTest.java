@@ -2,7 +2,9 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class FavouritesTest {
@@ -48,7 +50,7 @@ class FavouritesTest {
 
     }
 
-  @Test
+    @Test
     void testFavouritesContains() {
         assertFalse(testFavourites.favouritesContains("The Shining"));
         assertFalse(testFavourites.favouritesContains("Not a Movie"));
@@ -57,6 +59,19 @@ class FavouritesTest {
         testFavourites.addMovieToFavourites("Black Panther");
         testFavourites.addMovieToFavourites("Titanic");
         assertTrue(testFavourites.favouritesContains("Black Panther"));
-  }
+    }
+
+    @Test
+    void testRemoveMovieFromFavourites() {
+        assertFalse(testFavourites.removeMovieFromFavourites("Saw"));
+        testFavourites.addMovieToFavourites("The Shining");
+        testFavourites.addMovieToFavourites("Saw");
+        assertFalse(testFavourites.removeMovieFromFavourites("Not a Movie"));
+        assertTrue(testFavourites.removeMovieFromFavourites("Saw"));
+        assertFalse(testFavourites.favouritesContains("Saw"));
+        assertTrue(testFavourites.favouritesContains("The Shining"));
+
+
+    }
 
 }

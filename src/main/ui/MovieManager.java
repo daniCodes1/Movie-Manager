@@ -2,7 +2,11 @@ package ui;
 
 import model.Favourites;
 import model.MovieList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // based on Teller app; link below
@@ -15,6 +19,9 @@ public class MovieManager {
     private Scanner input;
     private Boolean keepGoing;
     private MovieList recommended;
+    private static final String JSON_STORE = "./data/favourites.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
 
     // EFFECTS: runs the movie application
@@ -50,6 +57,8 @@ public class MovieManager {
         favourites = new Favourites();
         recommended = new MovieList();
         recommended.addMovies();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
@@ -62,6 +71,8 @@ public class MovieManager {
         System.out.println("\t'f' to view or add to your Favourites Album");
         System.out.println("\t'a' to view all movies available");
         System.out.println("\t'r' to remove movies from your Favourites Album");
+        System.out.println("\t's' -> save your favourites to file");
+        System.out.println("\t'l' -> load your favourites from file");
         System.out.println("\t'q' to quit");
     }
 
@@ -71,19 +82,21 @@ public class MovieManager {
         keepGoing = true;
         if (command.equals("m")) {
             doRecommendation();
-        }
-        if (command.equals("a")) {
+        } else if (command.equals("a")) {
             System.out.println("Thank you for your interest! Here are all the movies available in our database: ");
             viewAllMovies();
-        }
-        if (command.equals("q")) {
+        } else if (command.equals("q")) {
             keepGoing = false;
-        }
-        if (command.equals("f")) {
+        } else if (command.equals("f")) {
             viewFavourites();
-        }
-        if (command.equals("r")) {
+        } else if (command.equals("r")) {
             removeMovie();
+        } else if (command.equals("s")) {
+            saveWorkRoom();
+        } else if (command.equals("l")) {
+            loadWorkRoom();
+        } else {
+            System.out.println("Selection not valid...");
         }
     }
 
@@ -91,7 +104,6 @@ public class MovieManager {
         System.out.println("\nPlease type the movie you would like to remove.");
 
         String command = input.next();
-        //command = command.toLowerCase();
 
         if (favourites.removeMovieFromFavourites(command)) {
             System.out.println("Your movie has been removed.");
@@ -245,6 +257,31 @@ public class MovieManager {
             System.out.println("You currently have no movies in your Favourites Album.");
         } else {
             System.out.println("Here are your favourite movies: " + favourites.viewFavourites());
+        }
+    }
+
+
+
+    // EFFECTS: saves the workroom to file
+    private void saveWorkRoom() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(favourites);
+            jsonWriter.close();
+            System.out.println("Saved your Favourites Album to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadWorkRoom() {
+        try {
+            favourites = jsonReader.read();
+            System.out.println("Loaded Favourites Album" + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }

@@ -1,0 +1,12 @@
+{"movies": [
+  {
+    "releaseDate": 2004,
+    "genre": "horror",
+    "title": "Saw"
+  },
+  {
+    "releaseDate": 1997,
+    "genre": "romance",
+    "title": "Titanic"
+  }
+]}

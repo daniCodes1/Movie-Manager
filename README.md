@@ -8,7 +8,7 @@ preferences that pop out in the beginning of the program.
 These are meant to filter out movies based on specifications such as
 genre and release date. Additionally, they will be able
 to view a database that contains over 70 movies for when they want to just browse around. They will be
-able to view and add movies to their *favourites  album*, which contains movies from my 
+able to view and add movies to their *favourites album*, which contains movies from my 
 recommendation application that they particularly enjoyed.
 
 ## Who is this for? And why?
