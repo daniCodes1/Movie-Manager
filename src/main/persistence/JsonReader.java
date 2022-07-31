@@ -1,6 +1,5 @@
 package persistence;
 
-import model.MovieList;
 import model.Favourites;
 import model.Movie;
 

@@ -153,7 +153,9 @@ public class MovieManager {
             endOptions();
         } else {
             System.out.println("Here are your favourite movies: ");
-            System.out.println(favourites.viewFavourites());
+            for (String movie : (favourites.viewFavourites())) {
+                System.out.println(movie);
+            }
             endOptions();
         }
     }
@@ -259,10 +261,12 @@ public class MovieManager {
         if (favourites.viewFavourites() == null) {
             System.out.println("You currently have no movies in your Favourites Album.");
         } else {
-            System.out.println("Here are your favourite movies: " + favourites.viewFavourites());
+            System.out.println("Here are your favourite movies: ");
+            for (String name : (favourites.viewFavourites())) {
+                System.out.println(name);
+            }
         }
     }
-
 
 
     // EFFECTS: saves the favourites album to file
