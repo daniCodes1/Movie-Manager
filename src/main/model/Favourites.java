@@ -75,15 +75,6 @@ public class Favourites implements Writable {
         return false;
     }
 
-    // MODIFIES: this
-    // EFFECTS: returns list containing titles of all the movies in the given list
-    public ArrayList<String> movieToString(ArrayList<Movie> listOfMovies) {
-        movieNames = new ArrayList<>();
-        for (Movie m : listOfMovies) {
-            movieNames.add(m.getTitle());
-        }
-        return movieNames;
-    }
 
     // MODIFIES: this
     // EFFECTS: returns list containing titles of all the movies in the given list
@@ -94,8 +85,6 @@ public class Favourites implements Writable {
         }
         return movieNames;
     }
-
-
 
     // getters
     public ArrayList<Movie> getFavourites() {

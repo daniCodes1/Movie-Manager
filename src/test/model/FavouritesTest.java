@@ -122,4 +122,27 @@ class FavouritesTest {
 
     }
 
+    @Test
+    void testGetSize() {
+        assertEquals(0, testFavourites.getSize());
+        try {
+            testFavourites.addMovieToFavourites("Titanic");
+        } catch (Exception e) {
+            fail();
+        }
+        assertEquals(1, testFavourites.getSize());
+    }
+
+    @Test
+    void testNamesOfMovies() {
+        assertEquals(0, testFavourites.namesOfMovies().size());
+        try {
+            testFavourites.addMovieToFavourites("Titanic");
+        } catch (Exception e) {
+            fail();
+        }
+        assertEquals(1, testFavourites.namesOfMovies().size());
+    }
+
+
 }
