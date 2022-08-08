@@ -49,4 +49,20 @@ public class JsonReaderTest extends JsonTest {
             // expected
         }
     }
+
+    @Test
+    void testReaderGeneralFavouritesWithException() {
+        JsonReader reader = new JsonReader("./data/testReaderGeneralFavourites.json");
+        try {
+            Favourites fav = reader.read();
+            ArrayList<Movie> movies = fav.getFavourites();
+            assertEquals(2, fav.getFavourites().size());
+            checkMovie("Saw", "horror", 2004,  movies.get(0));
+            checkMovie("Titanic", "romance", 1997,  movies.get(1));
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        } catch (Exception e) {
+            // expected
+        }
+    }
 }

@@ -54,6 +54,16 @@ class FavouritesTest {
     }
 
     @Test
+    void testAddMovieNoExceptions() {
+        assertEquals(0, testFavourites.getSize());
+        testFavourites.addMovieNoExceptions("Casablanca");
+        testFavourites.addMovieNoExceptions("Titanic");
+        assertEquals(2, testFavourites.getSize());
+        assertTrue(testFavourites.favouritesContains("Casablanca"));
+    }
+
+
+    @Test
     void testAddMovieToFavourites() {
         try {
             assertTrue(testFavourites.addMovieToFavourites("The Terminator"));
@@ -83,6 +93,7 @@ class FavouritesTest {
         }
 
     }
+
 
     @Test
     void testFavouritesContains() {
