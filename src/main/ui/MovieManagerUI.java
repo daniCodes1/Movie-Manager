@@ -138,6 +138,7 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
 
         } else {
             ArrayList<String> names = movies.namesOfMovies();
+            names.add(0, "Your favourite movies are: ");
             String[] str = new String[names.size()];
             JList<String> list = new JList<>(names.toArray(str));
             mainScreen.removeAll();
@@ -259,10 +260,10 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
     public void doResponse(JTextField releaseDate, JTextField genre) {
 
         int answer = JOptionPane.showConfirmDialog(mainScreen, moviesPanel,
-                "Preferences", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
+                "ENTER YOUR PREFERENCES", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
         if (answer == JOptionPane.OK_OPTION) {
             if (releaseDate.getText().isEmpty() | genre.getText().isEmpty()) {
-                JFrame empty = new JFrame("Empty");
+                JFrame empty = new JFrame("Error");
                 JOptionPane.showMessageDialog(empty, "Please input both preferences before continuing");
                 getRecommendation();
             } else {
@@ -399,7 +400,7 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
         // does nothing
     }
 
-    // EFFECTS: when 0 is pressed, leads user to input recommendations; when 1 is pressed, user can view database
+    // EFFECTS: when 'i' is pressed, leads user to input recommendations; when 'v' is pressed, user can view database
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_I) {

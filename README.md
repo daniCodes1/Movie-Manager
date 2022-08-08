@@ -41,7 +41,7 @@ to find a movie that doesn't just entertain but **also communicates** with them 
 prompted to input a movie that is checked against all the movies in my database. 
   - Note that users cannot add duplicate movies or movies not from the 
   database. There is an option to view all movies or get a movie recommendation if you need suggestions!
-- To generate the second event - this one uses keyboard -  you need to choose to press "i" , 
+- To generate the second required event - this one uses keyboard -  you need to choose to press "i" , 
 then input your preferences in each step. This will then give you a filtered list of movies based on your 
 preferences. You can press "v" to view the full database. There are also buttons for these functions too.
 - You can locate my visual component by clicking on any of these buttons: "Add Movie", "Save favourites",
