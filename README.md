@@ -31,8 +31,22 @@ to find a movie that doesn't just entertain but **also communicates** with them 
 - *As a user, I want to be able to view a list of all the movies
   for when I don’t have a preference*
 - *As a user, I want to be able to view the movies in my favourites album*
-- *As a user, when I select the quit option from the application menu, I want to be reminded to save my 
+- *As a user, when I leave the main menu, I want to be reminded to save my 
    favourites list*
 - *As a user, when I start the application, I want to be given the option to load my favourites list
    from file*
+
+## Instructions for grader:
+- You can generate the first required event by clicking on "Add Favourite Movie". Then, you will be 
+prompted to input a movie that is checked against all the movies in my database. 
+  - Note that users cannot add duplicate movies or movies not from the 
+  database. There is an option to view all movies or find a movie if you need suggestions!
+- To generate the second event, you need to choose to "receive a recommendation", then input your preferences in each 
+step. This will then give you a filtered list of movies based on your preferences.
+  - As soon as you load my application, you are also given the option to use keys by pressing "0" to receive the
+  recommendation.
+- There are two visual components, one appears when you click on "Add Movie", and the other one appears throughout 
+the program, such as after you input the movie.
+- You can save the state of my application by clicking on "Save favourites".
+- You can reload the state of my application by clicking on "Load Favourites".
 

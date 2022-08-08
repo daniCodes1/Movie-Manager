@@ -244,14 +244,16 @@ public class MovieManager {
     // user to retype the movie they wish to add
     public void findMovie(String s) {
         keepGoing = true;
-        if (favourites.addMovieToFavourites(s)) {
-            System.out.println("Your movie has been added.");
-            showFavourites();
-            endOptions();
-        } else {
+        try {
+            favourites.addMovieToFavourites(s);
+        } catch (Exception e) {
             System.out.println("This is an invalid or duplicate entry. Please try again.");
             handleEndOptions("i");
         }
+        System.out.println("Your movie has been added.");
+        showFavourites();
+        endOptions();
+
 
     }
 

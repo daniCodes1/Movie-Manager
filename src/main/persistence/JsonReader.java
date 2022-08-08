@@ -65,6 +65,10 @@ public class JsonReader {
         String genre = jsonObject.getString("genre");
         int releaseDate = jsonObject.getInt("releaseDate");
         Movie movie = new Movie(title, genre, releaseDate);
-        fav.addMovieToFavourites(movie.getTitle());
+        try {
+            fav.addMovieToFavourites(movie.getTitle());
+        } catch (Exception e) {
+            System.out.println("Error: Invalid movie or duplicate movie.");
+        }
     }
 }

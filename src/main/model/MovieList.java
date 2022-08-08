@@ -284,5 +284,10 @@ public class MovieList {
         return filteredGenre;
     }
 
+    public int getSize() {
+        return recommended.size();
+    }
+
+
 }
 

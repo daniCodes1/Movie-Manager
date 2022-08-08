@@ -43,8 +43,16 @@ public class JsonWriterTest extends JsonTest {
     void testWriterGeneralFavourites() {
         try {
             Favourites fav = new Favourites();
-            fav.addMovieToFavourites("Titanic");
-            fav.addMovieToFavourites("The Terminator");
+            try {
+                fav.addMovieToFavourites("Titanic");
+            } catch (Exception e) {
+                fail();
+            }
+            try {
+                fav.addMovieToFavourites("The Terminator");
+            } catch (Exception e) {
+                fail();
+            }
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralFavourites.json");
             writer.open();
             writer.write(fav);

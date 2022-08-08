@@ -1,5 +1,7 @@
 package model;
 
+import model.exceptions.DuplicateException;
+import model.exceptions.NotInDatabaseException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -13,6 +15,7 @@ public class Favourites implements Writable {
     ArrayList<Movie> favourites;
     MovieList recommended;
     ArrayList<Movie> removed;
+    ArrayList<String> movieNames;
 
     // EFFECTS: constructs a favourites collection with list of favourite movies and list of all movies in the database
     public Favourites() {
@@ -34,15 +37,19 @@ public class Favourites implements Writable {
     // MODIFIES: this
     // EFFECTS: if given Movie is in the database and favourites album does not already contain given movie, then add
     // given movie to end of the favourites album and returns true, else returns false
-    public Boolean addMovieToFavourites(String s) {
-        if (recommended.getMovieNames().contains(s) && !(favouritesContains(s))) {
+    public Boolean addMovieToFavourites(String s) throws DuplicateException, NotInDatabaseException {
+        if (!recommended.getMovieNames().contains(s)) {
+            throw new NotInDatabaseException();
+        } else if (favouritesContains(s)) {
+            throw new DuplicateException();
+        } else {
             favourites.add(recommended.getMovie(s));
             return true;
-        } else {
-            return false;
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: if given movie is in favourites, removes it from favourites and returns true, else returns false
     public Boolean removeMovieFromFavourites(String s) {
         removed = new ArrayList<>();
         if (favouritesContains(s)) {
@@ -68,10 +75,35 @@ public class Favourites implements Writable {
         return false;
     }
 
+    // MODIFIES: this
+    // EFFECTS: returns list containing titles of all the movies in the given list
+    public ArrayList<String> movieToString(ArrayList<Movie> listOfMovies) {
+        movieNames = new ArrayList<>();
+        for (Movie m : listOfMovies) {
+            movieNames.add(m.getTitle());
+        }
+        return movieNames;
+    }
 
-    // getter
+    // MODIFIES: this
+    // EFFECTS: returns list containing titles of all the movies in the given list
+    public ArrayList<String> namesOfMovies() {
+        movieNames = new ArrayList<>();
+        for (Movie m : favourites) {
+            movieNames.add(m.getTitle());
+        }
+        return movieNames;
+    }
+
+
+
+    // getters
     public ArrayList<Movie> getFavourites() {
         return favourites;
+    }
+
+    public int getSize() {
+        return favourites.size();
     }
 
 

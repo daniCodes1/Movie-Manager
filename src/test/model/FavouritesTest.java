@@ -1,5 +1,7 @@
 package model;
 
+import model.exceptions.DuplicateException;
+import model.exceptions.NotInDatabaseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,21 +34,51 @@ class FavouritesTest {
         list2.add("Titanic");
 
         assertEquals(null, testFavourites.viewFavourites());
-        testFavourites.addMovieToFavourites("Casablanca");
+        try {
+            testFavourites.addMovieToFavourites("Casablanca");
+        } catch (Exception e) {
+            fail();
+        }
         assertTrue(testFavourites.favouritesContains("Casablanca"));
         assertEquals(testFavourites.viewFavourites(), list);
 
-        testFavourites.addMovieToFavourites("Titanic");
+        try {
+            testFavourites.addMovieToFavourites("Titanic");
+        } catch (Exception e) {
+            fail();
+        }
         assertTrue(testFavourites.favouritesContains("Titanic"));
         assertEquals(testFavourites.viewFavourites(), list2);
     }
 
     @Test
     void testAddMovieToFavourites() {
-        assertTrue(testFavourites.addMovieToFavourites("The Terminator"));
-        assertFalse(testFavourites.addMovieToFavourites("Not a Movie"));
-        assertTrue(testFavourites.addMovieToFavourites("Carrie"));
-        assertFalse(testFavourites.addMovieToFavourites("The Terminator"));
+        try {
+            assertTrue(testFavourites.addMovieToFavourites("The Terminator"));
+        } catch (NotInDatabaseException | DuplicateException e) {
+            fail();
+        }
+
+        try {
+            assertFalse(testFavourites.addMovieToFavourites("Not a Movie"));
+            fail();
+        } catch (NotInDatabaseException e) {
+            // expected
+        } catch (DuplicateException e) {
+            fail();
+        }
+        try {
+            assertTrue(testFavourites.addMovieToFavourites("Carrie"));
+        } catch (Exception e) {
+            fail();
+        }
+        try {
+            assertFalse(testFavourites.addMovieToFavourites("The Terminator"));
+        } catch (DuplicateException e) {
+            // expected
+        } catch (NotInDatabaseException e) {
+            fail();
+        }
 
     }
 
@@ -54,18 +86,34 @@ class FavouritesTest {
     void testFavouritesContains() {
         assertFalse(testFavourites.favouritesContains("The Shining"));
         assertFalse(testFavourites.favouritesContains("Not a Movie"));
-        testFavourites.addMovieToFavourites("Interstellar");
+        try {
+            testFavourites.addMovieToFavourites("Interstellar");
+        } catch (Exception e) {
+            fail();
+        }
         assertTrue(testFavourites.favouritesContains("Interstellar"));
-        testFavourites.addMovieToFavourites("Black Panther");
-        testFavourites.addMovieToFavourites("Titanic");
+
+        try {
+            testFavourites.addMovieToFavourites("Black Panther");
+        } catch (Exception e) {
+            fail();
+        }
         assertTrue(testFavourites.favouritesContains("Black Panther"));
     }
 
     @Test
     void testRemoveMovieFromFavourites() {
         assertFalse(testFavourites.removeMovieFromFavourites("Saw"));
-        testFavourites.addMovieToFavourites("The Shining");
-        testFavourites.addMovieToFavourites("Saw");
+        try {
+            testFavourites.addMovieToFavourites("The Shining");
+        } catch (Exception e) {
+            fail();
+        }
+        try {
+            testFavourites.addMovieToFavourites("Saw");
+        } catch (Exception e) {
+            fail();
+        }
         assertFalse(testFavourites.removeMovieFromFavourites("Not a Movie"));
         assertTrue(testFavourites.removeMovieFromFavourites("Saw"));
         assertFalse(testFavourites.favouritesContains("Saw"));
