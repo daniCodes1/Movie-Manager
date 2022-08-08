@@ -8,6 +8,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
+
+import model.exceptions.DuplicateException;
+import model.exceptions.NotInDatabaseException;
 import org.json.*;
 
 // based on JsonSerializationDemo ; link below
@@ -67,7 +70,7 @@ public class JsonReader {
         Movie movie = new Movie(title, genre, releaseDate);
         try {
             fav.addMovieToFavourites(movie.getTitle());
-        } catch (Exception e) {
+        } catch (NotInDatabaseException | DuplicateException e) {
             System.out.println("Error: Invalid movie or duplicate movie.");
         }
     }

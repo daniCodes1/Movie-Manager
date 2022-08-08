@@ -45,6 +45,8 @@ public class JsonReaderTest extends JsonTest {
             checkMovie("Titanic", "romance", 1997,  movies.get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
+        } catch (Exception e) {
+            // expected
         }
     }
 }
