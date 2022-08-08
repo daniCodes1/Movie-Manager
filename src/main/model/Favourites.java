@@ -48,10 +48,11 @@ public class Favourites implements Writable {
         }
     }
 
-    // adds movie to favourites
-    public Boolean addMovieNoExceptions(String s) {
+    // REQUIRES: movie is in database and is not already in favourites
+    // MODIFIES: this
+    // EFFECTS: adds movie to favourites
+    public void addMovieNoExceptions(String s) {
         favourites.add(recommended.getMovie(s));
-        return true;
     }
 
     // MODIFIES: this

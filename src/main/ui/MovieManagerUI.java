@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.DatagramPacket;
+import java.security.DomainCombiner;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,8 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,11 +33,12 @@ import java.awt.event.ActionListener;
 public class MovieManagerUI extends JFrame implements ActionListener, KeyListener {
 
     private static final String JSON_STORE = "./data/favourites.json";
-    public static final int WIDTH = 900;
+    public static final int WIDTH = 1000;
     public static final int HEIGHT = 600;
     private ImageIcon icon;
     private ImageIcon familyMovies;
     private ImageIcon error;
+    private ImageIcon family;
     private JPanel mainScreen;
     private JPanel buttonsPanel;
     private JLabel mainText;
@@ -63,6 +68,7 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
         this.icon = new ImageIcon("./data/movieReel.png");
         this.familyMovies = new ImageIcon("./data/picWithText.jpeg");
         this.error = new ImageIcon("./data/errorImage.jpeg");
+        this.family = new ImageIcon("./data/family.jpg");
         this.jsonReader = new JsonReader(JSON_STORE);
         this.jsonWriter = new JsonWriter(JSON_STORE);
         this.mainText = new JLabel();
@@ -88,11 +94,14 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
         addKeyListener(this);
         setFocusable(true);
 
-        JLabel welcome = new JLabel("Welcome to your movie finder! Press 0 on your keyboard "
-                + "to receive movie recommendations, or press 1 to view all movies available.");
+        JTextArea welcome = new JTextArea("\"Welcome to your movie finder! \n\n "
+                + "Press  'i'  on your keyboard to input your preferences and get recommendations, \n\n"
+                + "or press  'v'  to view all movies available.");
+        welcome.setBackground(new Color(200,230,230));
+        welcome.setBorder(new EmptyBorder(20, 20, 20, 20));
         welcome.setFont(new Font("Arial", Font.PLAIN, 15));
         JOptionPane.showConfirmDialog(mainScreen, welcome,
-                "Welcome", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
+                "WELCOME", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
     }
 
 
@@ -174,6 +183,7 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
         JButton newButton = new JButton(phrase);
         newButton.setBackground(Color.PINK);
         newButton.setFont(new Font("SansSerif", Font.BOLD, 17));
+        newButton.setFocusable(false);
         return newButton;
     }
 
@@ -205,7 +215,7 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
     // https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html
     // EFFECTS: displays all movies in the database in scrollable form
     public void viewAllMovies() {
-        JFrame database = new JFrame("All");
+
         String message = "\n Here are all the movies:  \n ";
         for (String movieName : allMovies.getMovieNames()) {
             message += "\n\n" + movieName;
@@ -215,8 +225,14 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
         textArea.setEditable(false);
         textArea.setText(message);
         textArea.setCaretPosition(0);
+
         JScrollPane scrollPane = new JScrollPane(textArea);
-        JOptionPane.showMessageDialog(database, scrollPane);
+        scrollPane.setPreferredSize(new Dimension(400, 400));
+        scrollPane.setBackground(new Color(173, 216, 230));
+
+        JOptionPane.showConfirmDialog(mainScreen, scrollPane, "Name", JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE, family);
+
     }
 
     // EFFECTS: filters movie database by user's genre preference
@@ -254,7 +270,6 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
                 allMovies.addMovies();
                 allMovies.filterGenre(genre.getText());
                 ArrayList<String> finalRecs = allMovies.filterDate(releaseDate.getText());
-                JFrame recs = new JFrame("recs");
                 String recommendations = "\n Here are your movie recommendations:  \n ";
                 for (String movie : finalRecs) {
                     recommendations += "\n\n" + movie;
@@ -270,9 +285,11 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
     public void addMovie() {
         moviesPanel = new JPanel();
         JTextField movieInput = new JTextField(20);
-        JLabel enterName = new JLabel("Enter movie name: ");
+
+        JLabel enterName = new JLabel("Enter movie name");
         moviesPanel.add(enterName);
         moviesPanel.add(movieInput);
+
         int answer = JOptionPane.showConfirmDialog(mainScreen, moviesPanel, "Add a movie",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
         doAnswer(answer, movieInput);
@@ -308,9 +325,11 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
     public void removeMovie() {
         moviesPanel = new JPanel();
         JTextField movieInput = new JTextField(20);
-        JLabel enterName = new JLabel("Enter the name of movie to delete: ");
+
+        JLabel enterName = new JLabel("Enter the name of movie you want to remove. ");
         moviesPanel.add(enterName);
         moviesPanel.add(movieInput);
+
 
         int answer = JOptionPane.showConfirmDialog(mainScreen, moviesPanel,
                 "Remove Movie", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
@@ -383,10 +402,20 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
     // EFFECTS: when 0 is pressed, leads user to input recommendations; when 1 is pressed, user can view database
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_0) {
+        if (e.getKeyCode() == KeyEvent.VK_I) {
             getRecommendation();
-        } else if (e.getKeyCode() == KeyEvent.VK_1) {
+        } else if (e.getKeyCode() == KeyEvent.VK_V) {
             viewAllMovies();
+        } else if (e.getKeyCode() == KeyEvent.VK_P) {
+            JTextArea reminder = new JTextArea("Press  'i'  on your keyboard to input your preferences and"
+                    + " get recommendations, \n\n"
+                    + "or press  'v'  to view all movies available.");
+            reminder.setBackground(new Color(200,230,230));
+            reminder.setBorder(new EmptyBorder(20, 20, 20, 20));
+            reminder.setFont(new Font("Arial", Font.PLAIN, 15));
+            JOptionPane.showConfirmDialog(mainScreen, reminder,
+                    "Reminder: Keys you can use!", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE, icon);
         }
     }
 
