@@ -120,5 +120,13 @@ public class MovieListTest {
     void testGetMovie() {
         assertEquals(null, testMovieList.getMovie("Paw Patrol"));
     }
+
+    @Test
+    void testGetSize() {
+        assertEquals(0, testMovieList.getSize());
+        testMovieList.addMovie(casablanca);
+        testMovieList.addMovie(saw);
+        assertEquals(2, testMovieList.getSize());
+    }
 }
 

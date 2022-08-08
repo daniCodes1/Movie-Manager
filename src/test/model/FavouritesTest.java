@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FavouritesTest {
     Favourites testFavourites;
+    MovieList testRecommended;
     ArrayList<String> list;
     ArrayList<String> list2;
 
@@ -18,6 +19,7 @@ class FavouritesTest {
     @BeforeEach
     void runBefore() {
         testFavourites = new Favourites();
+        testRecommended = new MovieList();
         list = new ArrayList<>();
     }
 
@@ -124,7 +126,7 @@ class FavouritesTest {
 
     @Test
     void testGetSize() {
-        assertEquals(0, testFavourites.getSize());
+        assertEquals(0, testRecommended.getSize());
         try {
             testFavourites.addMovieToFavourites("Titanic");
         } catch (Exception e) {
