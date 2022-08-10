@@ -9,8 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.security.DomainCombiner;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +18,6 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -55,7 +52,6 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
     private JButton buttonToGetRecommendation;
     private JButton buttonToViewAll;
     private Favourites movies;
-    private Favourites saved;
     private MovieList allMovies;
 
     private JsonWriter jsonWriter;
@@ -221,7 +217,7 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
     public void viewAllMovies() {
 
         String message = "\n Here are all the movies:  \n ";
-        for (String movieName : allMovies.getMovieNames()) {
+        for (String movieName : allMovies.getAllMovieNames()) {
             message += "\n\n" + movieName;
         }
 
@@ -357,7 +353,7 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
     public void loadFavourites() {
         try {
             movies = jsonReader.read();
-            saved = jsonReader.read();
+            Favourites saved = jsonReader.read();
             List<String> names = saved.namesOfMovies();
             String[] str = new String[names.size()];
             JList<String> favouriteMovies = new JList<>(names.toArray(str));

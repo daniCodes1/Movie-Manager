@@ -31,14 +31,14 @@ public class MovieListTest {
 
     @Test
     void testConstructor() {
-        assertEquals(list, testMovieList.getRecommended());
-        assertEquals(list, testMovieList.getNames());
+        assertEquals(list, testMovieList.getDatabase());
+        assertEquals(list, testMovieList.getDatabaseNames());
     }
 
     @Test
     void testAddMovies() {
         testMovieList.addMovies();
-        assertEquals(72, testMovieList.getRecommended().size());
+        assertEquals(72, testMovieList.getDatabase().size());
     }
 
     @Test
@@ -98,9 +98,9 @@ public class MovieListTest {
 
     @Test
     void testGetMovieNames() {
-        assertEquals(72, testMovieList.getMovieNames().size());
-        assertTrue(testMovieList.getMovieNames().contains("Titanic"));
-        assertTrue(testMovieList.getMovieNames().contains("Carrie"));
+        assertEquals(72, testMovieList.getAllMovieNames().size());
+        assertTrue(testMovieList.getAllMovieNames().contains("Titanic"));
+        assertTrue(testMovieList.getAllMovieNames().contains("Carrie"));
     }
 
     @Test

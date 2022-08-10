@@ -7,20 +7,16 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 // Represents a favourites list storing user's favourite movies and list of all movies in database
 public class Favourites implements Writable {
 
     ArrayList<Movie> favourites;
-    MovieList recommended;
-    ArrayList<Movie> removed;
     ArrayList<String> movieNames;
 
     // EFFECTS: constructs a favourites collection with list of favourite movies and list of all movies in the database
     public Favourites() {
         favourites = new ArrayList<>();
-        recommended = new MovieList();
     }
 
 
@@ -30,15 +26,26 @@ public class Favourites implements Writable {
         if (favourites.size() == 0) {
             return null;
         } else {
-            return recommended.movieToString(favourites);
+            return movieToString(favourites);
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: returns list containing titles of all the movies in the given list
+    public ArrayList<String> movieToString(ArrayList<Movie> listOfMovies) {
+        ArrayList<String> movieNames = new ArrayList<>();
+        for (Movie m : listOfMovies) {
+            movieNames.add(m.getTitle());
+        }
+        return movieNames;
     }
 
     // MODIFIES: this
     // EFFECTS: if given Movie is in the database and favourites album does not already contain given movie, then add
     // given movie to end of the favourites album and returns true, else returns false
     public Boolean addMovieToFavourites(String s) throws DuplicateException, NotInDatabaseException {
-        if (!recommended.getMovieNames().contains(s)) {
+        MovieList recommended = new MovieList();
+        if (!recommended.getAllMovieNames().contains(s)) {
             throw new NotInDatabaseException();
         } else if (favouritesContains(s)) {
             throw new DuplicateException();
@@ -53,13 +60,14 @@ public class Favourites implements Writable {
     // MODIFIES: this
     // EFFECTS: adds movie to favourites
     public void addMovieNoExceptions(String s) {
+        MovieList recommended = new MovieList();
         favourites.add(recommended.getMovie(s));
     }
 
     // MODIFIES: this
     // EFFECTS: if given movie is in favourites, removes it from favourites and returns true, else returns false
     public Boolean removeMovieFromFavourites(String s) {
-        removed = new ArrayList<>();
+        ArrayList<Movie> removed = new ArrayList<>();
         if (favouritesContains(s)) {
             for (Movie m : favourites) {
                 if (!(s.equals(m.getTitle()))) {

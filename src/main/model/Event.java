@@ -52,4 +52,16 @@ public class Event {
     public String toString() {
         return dateLogged.toString() + "\n" + description;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Event event = (Event) o;
+        return Objects.equals(dateLogged, event.dateLogged) && Objects.equals(description, event.description);
+    }
 }

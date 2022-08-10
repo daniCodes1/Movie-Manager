@@ -80,3 +80,13 @@ Tue Aug 09 21:43:09 PDT 2022
 <br /> Movie: Spider-Man: No Way Home has been removed from favourites!
 
 Process finished with exit code 0
+
+
+## Phase 4: Task 3
+
+- If I had more time, I would make my code more robust and use exceptions in my remove function
+instead of if statements - for example, when someone inputs a movie that is not in the favourites list
+- If I had more time, I would make my Favourites class extend MovieList
+- If I had more time, I would extract piece of code that shows the error and confirmation dialogs and make it a 
+separate method to avoid duplicate code throughout MovieManagerUI
+- If I had more time, I would remove two of the three associations between Movie and MovieList.
