@@ -178,6 +178,8 @@ public class MovieList {
                 }
             }
         }
+        EventLog.getInstance().logEvent(new Event("Preferences have been inputted. Based on those "
+                + "preferences, Movie Recommender suggests: " + movieToString(filteredReleaseDate)));
         return movieToString(filteredReleaseDate);
     }
 

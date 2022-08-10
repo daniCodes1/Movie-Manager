@@ -50,3 +50,33 @@ image popup after you enter a favourite movie.
 - You can save the state of my application by clicking on "Save favourites".
 - You can reload the state of my application by clicking on "Load Favourites".
 
+
+## Phase 4: Task 2
+
+Tue Aug 09 21:41:02 PDT 2022
+<br /> Preferences have been inputted. Based on those preferences, Movie Recommender suggests:
+Guardians of the Galaxy, Black Panther, Spider-Man: No Way Home, Avengers: Endgame
+
+Tue Aug 09 21:41:22 PDT 2022
+<br /> Movie: Spider-Man: No Way Home has been added to favourites!
+
+Tue Aug 09 21:41:38 PDT 2022
+<br /> Movie: Black Panther has been added to favourites!
+
+Tue Aug 09 21:41:49 PDT 2022
+<br /> Preferences have been inputted. Based on those preferences, Movie Recommender suggests:
+The Bodyguard, Persuasion, Titanic, 10 Things I Hate About You
+
+Tue Aug 09 21:41:57 PDT 2022
+<br /> Movie: Persuasion has been added to favourites!
+
+Tue Aug 09 21:42:09 PDT 2022
+<br /> Movie: Black Panther has been removed from favourites!
+
+Tue Aug 09 21:42:42 PDT 2022
+<br /> Movie: A Quiet Place has been added to favourites!
+
+Tue Aug 09 21:43:09 PDT 2022
+<br /> Movie: Spider-Man: No Way Home has been removed from favourites!
+
+Process finished with exit code 0

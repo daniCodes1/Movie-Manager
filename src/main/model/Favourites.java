@@ -44,6 +44,7 @@ public class Favourites implements Writable {
             throw new DuplicateException();
         } else {
             favourites.add(recommended.getMovie(s));
+            EventLog.getInstance().logEvent(new Event("Movie: " + s + " has been added to favourites!"));
             return true;
         }
     }
@@ -66,6 +67,7 @@ public class Favourites implements Writable {
                 }
             }
             favourites = removed;
+            EventLog.getInstance().logEvent(new Event("Movie: " + s + " has been removed from favourites!"));
             return true;
         } else {
             return false;

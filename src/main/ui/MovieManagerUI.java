@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.Favourites;
 import model.MovieList;
 
@@ -60,7 +62,7 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
     private JsonReader jsonReader;
 
 
-    // constructor that sets up the movie manager application
+    // EFFECTS: constructor that sets up the movie manager application
     public MovieManagerUI() {
         this.movies = new Favourites();
         this.mainScreen = new JPanel();
@@ -208,6 +210,7 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
         } else if (e.getSource() == buttonToGetRecommendation) {
             getRecommendation();
         } else if (e.getSource() == buttonToQuit) {
+            printLog();
             System.exit(0);
         }
     }
@@ -359,9 +362,13 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
             String[] str = new String[names.size()];
             JList<String> favouriteMovies = new JList<>(names.toArray(str));
 
+
+
             mainScreen.removeAll();
+
             favouriteMovies.setFont(new Font("SansSerif", Font.BOLD, 17));
             mainScreen.add(favouriteMovies);
+            doHomeScreen();
 
             revalidate();
             repaint();
@@ -395,6 +402,7 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
     }
 
 
+    // FROM KEY LISTENER IMPLEMENTATION
     @Override
     public void keyTyped(KeyEvent e) {
         // does nothing
@@ -410,7 +418,8 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
         } else if (e.getKeyCode() == KeyEvent.VK_P) {
             JTextArea reminder = new JTextArea("Press  'i'  on your keyboard to input your preferences and"
                     + " get recommendations, \n\n"
-                    + "or press  'v'  to view all movies available.");
+                    + "or press  'v'  to view all movies available. \n\n"
+                    + "To view these options again at any point, press 'p'.");
             reminder.setBackground(new Color(200,230,230));
             reminder.setBorder(new EmptyBorder(20, 20, 20, 20));
             reminder.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -425,4 +434,13 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
     public void keyReleased(KeyEvent e) {
 
     }
+
+
+    // EFFECT: prints out the current instance of log onto the console
+    private void printLog() {
+        for (Event next : EventLog.getInstance()) {
+            System.out.println(next.getDate() + "\n" + next.getDescription() + "\n");
+        }
+    }
+
 }
