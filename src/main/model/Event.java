@@ -2,6 +2,7 @@ package model;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 
 /**
@@ -32,6 +33,12 @@ public class Event {
         return dateLogged;
     }
 
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dateLogged);
+    }
+
     /**
      * Gets the description of this event.
      *
@@ -39,26 +46,6 @@ public class Event {
      */
     public String getDescription() {
         return description;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == null) {
-            return false;
-        }
-        if (other.getClass() != this.getClass()) {
-            return false;
-        }
-
-        Event otherEvent = (Event) other;
-
-        return (this.dateLogged.equals(otherEvent.dateLogged)
-                && this.description.equals(otherEvent.description));
-    }
-
-    @Override
-    public int hashCode() {
-        return (HASH_CONSTANT * dateLogged.hashCode() + description.hashCode());
     }
 
     @Override

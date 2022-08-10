@@ -435,7 +435,6 @@ public class MovieManagerUI extends JFrame implements ActionListener, KeyListene
 
     }
 
-
     // EFFECT: prints out the current instance of log onto the console
     private void printLog() {
         for (Event next : EventLog.getInstance()) {
